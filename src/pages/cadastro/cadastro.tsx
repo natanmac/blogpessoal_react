@@ -44,23 +44,20 @@ function Cadastro() {
   async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>){
     e.preventDefault()
 
-    if(confirmarSenha === usuario.senha && usuario.senha.length >= 8) {
+    if(confirmarSenha === usuario.senha && usuario.senha.length >= 8){
 
       setIsLoading(true)
 
-      try {
-        await cadastrarUsuario('/usuario/cadastrar', usuario, setUsuario)
-        alert("Usuário cadastrado com sucesso")
-      } catch (error) {
-        alert("Erro ao cadastrar o usuario")
-        console.error(error)
+      try{
+        await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
+        alert('Usuário cadastrado com sucesso!')
+      }catch(error){
+        alert('Erro ao cadastrar o usuário!')
       }
     }else{
-      alert("Dados do usuário inconsistentes! Verifique as informações do cadastro")
-      setUsuario({
-        ...usuario,
-        senha: ""
-      })
+      alert('Dados do usuário inconsistentes! Verifique as informações do cadastro.')
+      setUsuario({...usuario, senha: ''})
+      setConfirmaSenha('')
     }
 
     setIsLoading(false)
